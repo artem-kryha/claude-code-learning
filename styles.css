@@ -1,21 +1,21 @@
 /* ═══════════════════════════════════════════════════════════
    CLAUDE CODE LEARNING JOURNEY — styles.css
-   Stack: vanilla CSS, mobile-first, BEM-like, dark theme
+   Stack: vanilla CSS, mobile-first, BEM-like, warm light theme
    ═══════════════════════════════════════════════════════════ */
 
 /* ─── DESIGN TOKENS ─────────────────────────────────────── */
 :root {
   /* Colors */
-  --color-bg:        #0a0a0a;
-  --color-surface:   #111111;
-  --color-surface-2: #161616;
-  --color-border:    #1e1e1e;
-  --color-border-2:  #2a2a2a;
-  --color-text:      #e8e8e8;
-  --color-muted:     #555555;
-  --color-muted-2:   #888888;
-  --color-accent:    #f5a623;
-  --color-accent-dim:#f5a6231a;
+  --color-bg:        #faf7f2;
+  --color-surface:   #f3ede3;
+  --color-surface-2: #ede5d8;
+  --color-border:    #ddd4c4;
+  --color-border-2:  #ccc0ac;
+  --color-text:      #1e1712;
+  --color-muted:     #8a7d6e;
+  --color-muted-2:   #5c5040;
+  --color-accent:    #d4880a;
+  --color-accent-dim:#d4880a1a;
 
   /* Typography */
   --font-display: 'Bebas Neue', 'Arial Narrow', sans-serif;
@@ -110,13 +110,36 @@ button {
   transition:
     opacity 600ms var(--ease-out),
     transform 600ms var(--ease-out);
-  transition-delay: var(--delay, 0ms);
 }
 
 .fade-in.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Staggered delays via nth-child — hero section */
+.hero__text.fade-in    { transition-delay: 0ms; }
+.hero__visual.fade-in  { transition-delay: 150ms; }
+
+/* Staggered delays — metrics grid */
+.metrics__grid .fade-in:nth-child(1) { transition-delay: 50ms; }
+.metrics__grid .fade-in:nth-child(2) { transition-delay: 100ms; }
+.metrics__grid .fade-in:nth-child(3) { transition-delay: 150ms; }
+.metrics__grid .fade-in:nth-child(4) { transition-delay: 200ms; }
+
+/* Staggered delays — timeline items */
+.timeline .fade-in:nth-child(1) { transition-delay: 50ms; }
+.timeline .fade-in:nth-child(2) { transition-delay: 100ms; }
+.timeline .fade-in:nth-child(3) { transition-delay: 150ms; }
+.timeline .fade-in:nth-child(4) { transition-delay: 200ms; }
+
+/* Staggered delays — log entries */
+.log__entries .fade-in:nth-child(1) { transition-delay: 50ms; }
+.log__entries .fade-in:nth-child(2) { transition-delay: 100ms; }
+.log__entries .fade-in:nth-child(3) { transition-delay: 150ms; }
+
+/* Log placeholder */
+.log__placeholder.fade-in { transition-delay: 100ms; }
 
 /* ─── SITE HEADER ────────────────────────────────────────── */
 .site-header {
@@ -126,7 +149,7 @@ button {
   right: 0;
   z-index: 100;
   border-bottom: 1px solid var(--color-border);
-  background: rgba(10, 10, 10, 0.92);
+  background: rgba(250, 247, 242, 0.92);
   backdrop-filter: blur(12px);
 }
 
@@ -178,7 +201,6 @@ button {
   min-height: 100svh;
   display: flex;
   align-items: center;
-  padding-top: 52px;
   padding-block: calc(52px + var(--sp-7)) var(--sp-7);
   border-bottom: 1px solid var(--color-border);
   position: relative;
@@ -191,11 +213,27 @@ button {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(var(--color-border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+    linear-gradient(var(--color-border-2) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border-2) 1px, transparent 1px);
   background-size: 60px 60px;
   opacity: 0.3;
   pointer-events: none;
+}
+
+/* Large editorial background text */
+.hero__deco {
+  position: absolute;
+  right: -0.05em;
+  bottom: -0.15em;
+  font-family: var(--font-display);
+  font-size: clamp(18rem, 40vw, 36rem);
+  line-height: 1;
+  color: var(--color-text);
+  opacity: 0.04;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.04em;
+  z-index: 0;
 }
 
 .hero__inner {
@@ -223,8 +261,8 @@ button {
 
 .hero__name {
   font-family: var(--font-display);
-  font-size: clamp(5rem, 15vw, 10rem);
-  line-height: 0.9;
+  font-size: clamp(6rem, 18vw, 12rem);
+  line-height: 0.88;
   letter-spacing: -0.02em;
   color: var(--color-text);
 }
@@ -342,21 +380,30 @@ button {
 
 /* ─── METRICS ────────────────────────────────────────────── */
 .metrics {
-  padding-block: var(--sp-6);
+  padding-block: 0;
   border-bottom: 1px solid var(--color-border);
 }
 
+/* Mobile: 2×2 grid */
 .metrics__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1px;
+  gap: 0;
   background: var(--color-border);
-  border: 1px solid var(--color-border);
+  border-left: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
 }
 
+/* Desktop: full-width 4-column newspaper data bar */
 @media (min-width: 768px) {
+  .metrics {
+    padding-block: 0;
+  }
+
   .metrics__grid {
     grid-template-columns: repeat(4, 1fr);
+    border-left: none;
+    border-right: none;
   }
 }
 
@@ -366,6 +413,13 @@ button {
   display: flex;
   flex-direction: column;
   gap: var(--sp-1);
+  /* 1px gap via parent background creates vertical dividers */
+}
+
+@media (min-width: 768px) {
+  .metric-card {
+    padding: var(--sp-5) var(--sp-4);
+  }
 }
 
 .metric-card--accent {
@@ -381,13 +435,13 @@ button {
 
 .metric-card__value {
   font-family: var(--font-display);
-  font-size: 3rem;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
   line-height: 1;
   color: var(--color-text);
 }
 
 .metric-card__value--level {
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
 }
 
 .metric-card__unit {
@@ -439,6 +493,14 @@ button {
   margin-bottom: var(--sp-6);
 }
 
+/* Short amber rule above eyebrow — editorial punctuation */
+.section-header__rule {
+  width: 40px;
+  height: 2px;
+  background: var(--color-accent);
+  margin-bottom: var(--sp-2);
+}
+
 .section-header__eyebrow {
   font-size: 0.65rem;
   text-transform: uppercase;
@@ -449,8 +511,8 @@ button {
 
 .section-header__title {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 8vw, 6rem);
-  line-height: 0.95;
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  line-height: 0.92;
   letter-spacing: 0.01em;
   color: var(--color-text);
   font-weight: 400;
@@ -470,7 +532,7 @@ button {
 
 .timeline__item {
   display: grid;
-  grid-template-columns: 56px 1fr;
+  grid-template-columns: 64px 1fr;
   gap: var(--sp-3);
 }
 
@@ -483,11 +545,17 @@ button {
 
 .timeline__num {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 3rem;
   color: var(--color-muted);
   line-height: 1;
-  padding-top: 24px;
+  padding-top: 18px;
   transition: color var(--duration) var(--ease-out);
+}
+
+@media (min-width: 768px) {
+  .timeline__num {
+    font-size: 4rem;
+  }
 }
 
 .timeline__item:has(.phase-card[aria-expanded="true"]) .timeline__num {
@@ -720,7 +788,7 @@ button {
 
 .log-entry__title {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
   font-weight: 400;
   color: var(--color-text);
   letter-spacing: 0.02em;
@@ -810,10 +878,6 @@ button {
     gap: var(--sp-2);
   }
 
-  .metrics__grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
   .phase-card__title {
     font-size: 1.1rem;
   }
@@ -830,7 +894,7 @@ button {
   }
 
   .timeline__item {
-    grid-template-columns: 72px 1fr;
+    grid-template-columns: 88px 1fr;
     gap: var(--sp-4);
   }
 }
