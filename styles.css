@@ -83,6 +83,23 @@ button {
   width: 100%;
 }
 
+/* Skip to content link — keyboard accessibility */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--sp-3);
+  background: var(--color-accent);
+  color: var(--color-bg);
+  padding: var(--sp-1) var(--sp-2);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  z-index: 200;
+  border-radius: 0 0 2px 2px;
+  opacity: 1;
+}
+.skip-link:focus { top: 0; }
+
 /* Screen-reader only */
 .sr-only {
   position: absolute;
@@ -632,6 +649,21 @@ button {
   color: var(--color-text);
   flex: 1;
   letter-spacing: 0.02em;
+}
+
+/* Phase completion badge */
+.phase-card__badge {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 3px 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.phase-card__badge--complete {
+  background: var(--color-accent);
+  color: var(--color-bg);
 }
 
 .phase-card__controls {

@@ -12,10 +12,13 @@
 </head>
 <body>
 
+  <!-- Skip to content — accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- ─────────────────────── HEADER ─────────────────────── -->
   <header class="site-header" role="banner">
     <div class="site-header__inner container">
-      <span class="site-header__wordmark">ARTEM.DEV</span>
+      <a href="#main-content" class="site-header__wordmark" aria-label="Artem — home">ARTEM.DEV</a>
       <nav class="site-header__nav" aria-label="Page sections">
         <a href="#phases" class="site-header__link">Phases</a>
         <a href="#log" class="site-header__link">Log</a>
@@ -28,8 +31,11 @@
 
     <!-- ─────────────────────── HERO ─────────────────────── -->
     <section class="hero" aria-labelledby="hero-name">
+      <!-- Decorative background text — purely editorial, not read by screen readers -->
+      <span class="hero__deco" aria-hidden="true">20H</span>
+
       <div class="container hero__inner">
-        <div class="hero__text fade-in" style="--delay: 0ms">
+        <div class="hero__text fade-in">
           <p class="hero__eyebrow">Learning Journey</p>
           <h1 class="hero__name" id="hero-name">ARTEM</h1>
           <h2 class="hero__title">Claude Code<br><span class="hero__title--accent">0 → Pro</span></h2>
@@ -39,7 +45,7 @@
             <time class="hero__meta-value" datetime="2026-04-01">April 1, 2026</time>
           </p>
         </div>
-        <div class="hero__visual fade-in" style="--delay: 150ms" aria-hidden="true">
+        <div class="hero__visual fade-in" aria-hidden="true">
           <div class="hero__badge">
             <span class="hero__badge-num">20</span>
             <span class="hero__badge-unit">hours</span>
@@ -61,34 +67,34 @@
         <h2 class="sr-only" id="metrics-heading">Progress Overview</h2>
         <div class="metrics__grid">
 
-          <article class="metric-card fade-in" style="--delay: 50ms">
+          <article class="metric-card fade-in">
             <span class="metric-card__label">Total Hours</span>
-            <span class="metric-card__value" data-count-to="20">0</span>
+            <span class="metric-card__value" data-count-to="20">4</span>
             <span class="metric-card__unit">/ 20h goal</span>
             <div class="metric-card__bar">
-              <div class="metric-card__bar-fill" data-width="0" style="width: 0%"></div>
+              <div class="metric-card__bar-fill" data-width="0"></div>
             </div>
           </article>
 
-          <article class="metric-card fade-in" style="--delay: 100ms">
+          <article class="metric-card fade-in">
             <span class="metric-card__label">Days Planned</span>
             <span class="metric-card__value">4–5</span>
             <span class="metric-card__unit">days sprint</span>
             <div class="metric-card__bar">
-              <div class="metric-card__bar-fill" data-width="20" style="width: 0%"></div>
+              <div class="metric-card__bar-fill" data-width="20"></div>
             </div>
           </article>
 
-          <article class="metric-card fade-in" style="--delay: 150ms">
-            <span class="metric-card__label">Phases</span>
-            <span class="metric-card__value">4</span>
-            <span class="metric-card__unit">total phases</span>
+          <article class="metric-card fade-in">
+            <span class="metric-card__label">Phases Done</span>
+            <span class="metric-card__value" id="phases-display">1</span>
+            <span class="metric-card__unit">of 4 complete</span>
             <div class="metric-card__bar">
-              <div class="metric-card__bar-fill" data-width="0" style="width: 0%"></div>
+              <div class="metric-card__bar-fill" data-width="0"></div>
             </div>
           </article>
 
-          <article class="metric-card metric-card--accent fade-in" style="--delay: 200ms">
+          <article class="metric-card metric-card--accent fade-in">
             <span class="metric-card__label">Current Level</span>
             <span class="metric-card__value metric-card__value--level" id="level-display">Beginner</span>
             <span class="metric-card__unit">→ Pro</span>
@@ -110,7 +116,8 @@
     <!-- ─────────────────────── PHASES ─────────────────────── -->
     <section class="phases" id="phases" aria-labelledby="phases-heading">
       <div class="container">
-        <header class="section-header fade-in" style="--delay: 0ms">
+        <header class="section-header fade-in">
+          <div class="section-header__rule" aria-hidden="true"></div>
           <p class="section-header__eyebrow">Curriculum</p>
           <h2 class="section-header__title" id="phases-heading">LEARNING<br>PHASES</h2>
         </header>
@@ -118,27 +125,23 @@
         <div class="timeline" role="list">
 
           <!-- Phase 1 -->
-          <article class="timeline__item fade-in" style="--delay: 50ms" role="listitem">
+          <article class="timeline__item fade-in" role="listitem">
             <div class="timeline__marker" aria-hidden="true">
               <span class="timeline__num">01</span>
               <div class="timeline__line"></div>
             </div>
             <div class="timeline__content">
-              <button
-                class="phase-card"
-                aria-expanded="false"
-                aria-controls="phase-1-body"
-                data-phase="1"
-              >
+              <button class="phase-card" aria-expanded="false" aria-controls="phase-1-body" data-phase="1">
                 <div class="phase-card__header">
                   <div class="phase-card__meta">
                     <span class="phase-card__day">Day 1</span>
                     <span class="phase-card__hours">4h</span>
                   </div>
                   <h3 class="phase-card__title">Foundation &amp; Setup</h3>
+                  <span class="phase-card__badge phase-card__badge--complete" aria-label="Phase 1 complete">&#10003; Complete</span>
                   <div class="phase-card__controls">
-                    <label class="phase-card__check" onclick="event.stopPropagation()" aria-label="Mark Phase 1 complete">
-                      <input type="checkbox" data-phase-complete="1" aria-label="Phase 1 complete">
+                    <label class="phase-card__check" onclick="event.stopPropagation()">
+                      <input type="checkbox" data-phase-complete="1" aria-label="Mark Phase 1 complete">
                       <span class="phase-card__check-box" aria-hidden="true"></span>
                     </label>
                     <span class="phase-card__chevron" aria-hidden="true">↓</span>
@@ -147,44 +150,24 @@
               </button>
               <div class="phase-card__body" id="phase-1-body" hidden>
                 <ul class="topic-list" role="list">
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    Claude Code install &amp; terminal setup
-                  </li>
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    Core commands: file ops, search, edit
-                  </li>
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    CLAUDE.md project context files
-                  </li>
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    Git workflow integration
-                  </li>
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    First real coding task with Claude Code
-                  </li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>Claude Code install &amp; terminal setup</li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>Core commands: file ops, search, edit</li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>CLAUDE.md project context files</li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>Git workflow integration</li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>First real coding task with Claude Code</li>
                 </ul>
               </div>
             </div>
           </article>
 
           <!-- Phase 2 -->
-          <article class="timeline__item fade-in" style="--delay: 100ms" role="listitem">
+          <article class="timeline__item fade-in" role="listitem">
             <div class="timeline__marker" aria-hidden="true">
               <span class="timeline__num">02</span>
               <div class="timeline__line"></div>
             </div>
             <div class="timeline__content">
-              <button
-                class="phase-card"
-                aria-expanded="false"
-                aria-controls="phase-2-body"
-                data-phase="2"
-              >
+              <button class="phase-card" aria-expanded="false" aria-controls="phase-2-body" data-phase="2">
                 <div class="phase-card__header">
                   <div class="phase-card__meta">
                     <span class="phase-card__day">Day 2</span>
@@ -192,8 +175,8 @@
                   </div>
                   <h3 class="phase-card__title">Agentic Workflows</h3>
                   <div class="phase-card__controls">
-                    <label class="phase-card__check" onclick="event.stopPropagation()" aria-label="Mark Phase 2 complete">
-                      <input type="checkbox" data-phase-complete="2" aria-label="Phase 2 complete">
+                    <label class="phase-card__check" onclick="event.stopPropagation()">
+                      <input type="checkbox" data-phase-complete="2" aria-label="Mark Phase 2 complete">
                       <span class="phase-card__check-box" aria-hidden="true"></span>
                     </label>
                     <span class="phase-card__chevron" aria-hidden="true">↓</span>
@@ -202,44 +185,24 @@
               </button>
               <div class="phase-card__body" id="phase-2-body" hidden>
                 <ul class="topic-list" role="list">
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    Multi-step autonomous task execution
-                  </li>
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    Subagents and parallel workloads
-                  </li>
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    Hooks and automated triggers
-                  </li>
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    Custom slash commands &amp; skills
-                  </li>
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    Building a real agentic workflow
-                  </li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>Multi-step autonomous task execution</li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>Subagents and parallel workloads</li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>Hooks and automated triggers</li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>Custom slash commands &amp; skills</li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>Building a real agentic workflow</li>
                 </ul>
               </div>
             </div>
           </article>
 
           <!-- Phase 3 -->
-          <article class="timeline__item fade-in" style="--delay: 150ms" role="listitem">
+          <article class="timeline__item fade-in" role="listitem">
             <div class="timeline__marker" aria-hidden="true">
               <span class="timeline__num">03</span>
               <div class="timeline__line"></div>
             </div>
             <div class="timeline__content">
-              <button
-                class="phase-card"
-                aria-expanded="false"
-                aria-controls="phase-3-body"
-                data-phase="3"
-              >
+              <button class="phase-card" aria-expanded="false" aria-controls="phase-3-body" data-phase="3">
                 <div class="phase-card__header">
                   <div class="phase-card__meta">
                     <span class="phase-card__day">Day 3</span>
@@ -247,8 +210,8 @@
                   </div>
                   <h3 class="phase-card__title">MCP &amp; Integrations</h3>
                   <div class="phase-card__controls">
-                    <label class="phase-card__check" onclick="event.stopPropagation()" aria-label="Mark Phase 3 complete">
-                      <input type="checkbox" data-phase-complete="3" aria-label="Phase 3 complete">
+                    <label class="phase-card__check" onclick="event.stopPropagation()">
+                      <input type="checkbox" data-phase-complete="3" aria-label="Mark Phase 3 complete">
                       <span class="phase-card__check-box" aria-hidden="true"></span>
                     </label>
                     <span class="phase-card__chevron" aria-hidden="true">↓</span>
@@ -257,43 +220,23 @@
               </button>
               <div class="phase-card__body" id="phase-3-body" hidden>
                 <ul class="topic-list" role="list">
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    Model Context Protocol deep-dive
-                  </li>
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    Installing &amp; configuring MCP servers
-                  </li>
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    Building a custom MCP server
-                  </li>
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    External tool integrations (GitHub, Slack, DBs)
-                  </li>
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    Security &amp; permission models
-                  </li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>Model Context Protocol deep-dive</li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>Installing &amp; configuring MCP servers</li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>Building a custom MCP server</li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>External tool integrations (GitHub, Slack, DBs)</li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>Security &amp; permission models</li>
                 </ul>
               </div>
             </div>
           </article>
 
           <!-- Phase 4 -->
-          <article class="timeline__item fade-in" style="--delay: 200ms" role="listitem">
+          <article class="timeline__item fade-in" role="listitem">
             <div class="timeline__marker timeline__marker--last" aria-hidden="true">
               <span class="timeline__num">04</span>
             </div>
             <div class="timeline__content">
-              <button
-                class="phase-card"
-                aria-expanded="false"
-                aria-controls="phase-4-body"
-                data-phase="4"
-              >
+              <button class="phase-card" aria-expanded="false" aria-controls="phase-4-body" data-phase="4">
                 <div class="phase-card__header">
                   <div class="phase-card__meta">
                     <span class="phase-card__day">Days 4–5</span>
@@ -301,8 +244,8 @@
                   </div>
                   <h3 class="phase-card__title">Pro Patterns &amp; Real Projects</h3>
                   <div class="phase-card__controls">
-                    <label class="phase-card__check" onclick="event.stopPropagation()" aria-label="Mark Phase 4 complete">
-                      <input type="checkbox" data-phase-complete="4" aria-label="Phase 4 complete">
+                    <label class="phase-card__check" onclick="event.stopPropagation()">
+                      <input type="checkbox" data-phase-complete="4" aria-label="Mark Phase 4 complete">
                       <span class="phase-card__check-box" aria-hidden="true"></span>
                     </label>
                     <span class="phase-card__chevron" aria-hidden="true">↓</span>
@@ -311,26 +254,11 @@
               </button>
               <div class="phase-card__body" id="phase-4-body" hidden>
                 <ul class="topic-list" role="list">
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    Production-grade project scaffolding
-                  </li>
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    Test-driven development with Claude Code
-                  </li>
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    Refactoring large codebases safely
-                  </li>
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    Memory systems &amp; persistent context
-                  </li>
-                  <li class="topic-list__item">
-                    <span class="topic-list__icon" aria-hidden="true">▸</span>
-                    Ship: a real AI-powered project
-                  </li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>Production-grade project scaffolding</li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>Test-driven development with Claude Code</li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>Refactoring large codebases safely</li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>Memory systems &amp; persistent context</li>
+                  <li class="topic-list__item"><span class="topic-list__icon" aria-hidden="true">▸</span>Ship: a real AI-powered project</li>
                 </ul>
               </div>
             </div>
@@ -343,14 +271,14 @@
     <!-- ─────────────────────── PROGRESS LOG ─────────────────────── -->
     <section class="log" id="log" aria-labelledby="log-heading">
       <div class="container">
-        <header class="section-header fade-in" style="--delay: 0ms">
+        <header class="section-header fade-in">
+          <div class="section-header__rule" aria-hidden="true"></div>
           <p class="section-header__eyebrow">Journal</p>
           <h2 class="section-header__title" id="log-heading">PROGRESS<br>LOG</h2>
         </header>
 
         <div class="log__entries" role="feed" aria-label="Progress log entries">
-
-          <article class="log-entry fade-in" style="--delay: 50ms">
+          <article class="log-entry fade-in">
             <header class="log-entry__header">
               <time class="log-entry__date" datetime="2026-04-01">Apr 01, 2026</time>
               <span class="log-entry__tag">Day 1 — Phase 1</span>
@@ -364,10 +292,9 @@
               <span class="log-entry__status log-entry__status--active">In progress</span>
             </footer>
           </article>
-
         </div>
 
-        <p class="log__placeholder fade-in" style="--delay: 100ms" aria-label="More entries coming soon">
+        <p class="log__placeholder fade-in" aria-label="More entries coming soon">
           <span class="log__placeholder-line" aria-hidden="true">— more entries incoming —</span>
         </p>
       </div>

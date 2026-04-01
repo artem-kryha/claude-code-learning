@@ -13,9 +13,11 @@ const TOTAL_HOURS = 20;
 const LEVELS = ['Beginner', 'Intermediate', 'Advanced', 'Pro'];
 
 /* ─── STATE ─────────────────────────────────────────────── */
+const savedPhases = localStorage.getItem(STORAGE_KEY);
 const state = {
+  // Default: phase 1 complete. Respect any existing localStorage data.
   completedPhases: new Set(
-    JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+    savedPhases ? JSON.parse(savedPhases) : [1]
   ),
 };
 
@@ -68,6 +70,10 @@ function updateMetrics() {
   if (hoursValue && hoursValue.dataset.countTo) {
     hoursValue.textContent = hours;
   }
+
+  // Phases done card
+  const phasesDisplay = document.getElementById('phases-display');
+  if (phasesDisplay) phasesDisplay.textContent = completedPhaseCount;
 
   // All bar fills
   const bars = document.querySelectorAll('.metric-card__bar-fill');
