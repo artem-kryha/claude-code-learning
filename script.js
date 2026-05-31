@@ -3,9 +3,7 @@
  * Handles: fade-in on scroll, phase accordion, progress ring, metric bars
  */
 
-// After deploying the Cloudflare Worker, replace this URL with your worker URL
-// e.g. https://meta-capi.YOUR_SUBDOMAIN.workers.dev
-const CAPI_ENDPOINT = 'https://meta-capi.YOUR_SUBDOMAIN.workers.dev';
+const CAPI_ENDPOINT = 'https://meta-capi.thethor.workers.dev';
 
 function sendCapi(event_name) {
   fetch(CAPI_ENDPOINT, {
