@@ -4,5 +4,6 @@ Thumbs.db
 *.log
 .env
 .env.local
+capi/.dev.vars
 dist/
 .cache/

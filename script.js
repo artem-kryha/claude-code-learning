@@ -3,6 +3,22 @@
  * Handles: fade-in on scroll, phase accordion, progress ring, metric bars
  */
 
+// After deploying the Cloudflare Worker, replace this URL with your worker URL
+// e.g. https://meta-capi.YOUR_SUBDOMAIN.workers.dev
+const CAPI_ENDPOINT = 'https://meta-capi.YOUR_SUBDOMAIN.workers.dev';
+
+function sendCapi(event_name) {
+  fetch(CAPI_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      event_name,
+      event_source_url: window.location.href,
+      client_user_agent: navigator.userAgent,
+    }),
+  }).catch(() => {});
+}
+
 'use strict';
 
 /* ─── CONSTANTS ─────────────────────────────────────────── */
@@ -166,6 +182,7 @@ function initCheckboxes() {
         if (typeof fbq === 'function') {
           fbq('track', 'Lead', { content_name: 'task_completed' });
         }
+        sendCapi('Lead');
       } else {
         state.completedPhases.delete(phase);
       }
