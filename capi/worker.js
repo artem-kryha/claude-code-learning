@@ -7,6 +7,13 @@ const CORS_HEADERS = {
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
+function corsResponse(body, status = 200) {
+  return new Response(body, {
+    status,
+    headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' },
+  });
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === 'OPTIONS') {
@@ -14,36 +21,36 @@ export default {
     }
 
     if (request.method !== 'POST') {
-      return new Response('Method Not Allowed', { status: 405 });
+      return corsResponse(JSON.stringify({ error: 'Method Not Allowed' }), 405);
     }
 
-    const { event_name, event_source_url, client_user_agent } = await request.json();
+    try {
+      const { event_name, event_source_url, client_user_agent } = await request.json();
 
-    const payload = {
-      data: [{
-        event_name,
-        event_time: Math.floor(Date.now() / 1000),
-        action_source: 'website',
-        event_source_url,
-        user_data: {
-          client_ip_address: request.headers.get('CF-Connecting-IP'),
-          client_user_agent,
-        },
-      }],
-      access_token: env.META_ACCESS_TOKEN,
-    };
+      const payload = {
+        data: [{
+          event_name,
+          event_time: Math.floor(Date.now() / 1000),
+          action_source: 'website',
+          event_source_url,
+          user_data: {
+            client_ip_address: request.headers.get('CF-Connecting-IP'),
+            client_user_agent,
+          },
+        }],
+        access_token: env.META_ACCESS_TOKEN,
+      };
 
-    const fbResponse = await fetch(FB_CAPI_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
+      const fbResponse = await fetch(FB_CAPI_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
 
-    const result = await fbResponse.json();
-
-    return new Response(JSON.stringify(result), {
-      status: fbResponse.status,
-      headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' },
-    });
+      const text = await fbResponse.text();
+      return corsResponse(text, fbResponse.status);
+    } catch (err) {
+      return corsResponse(JSON.stringify({ error: err.message }), 500);
+    }
   },
 };
