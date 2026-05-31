@@ -163,6 +163,9 @@ function initCheckboxes() {
     checkbox.addEventListener('change', () => {
       if (checkbox.checked) {
         state.completedPhases.add(phase);
+        if (typeof fbq === 'function') {
+          fbq('track', 'Lead', { content_name: 'task_completed' });
+        }
       } else {
         state.completedPhases.delete(phase);
       }
