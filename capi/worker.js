@@ -39,6 +39,7 @@ export default {
           },
         }],
         access_token: env.META_ACCESS_TOKEN,
+        ...(env.META_TEST_EVENT_CODE && { test_event_code: env.META_TEST_EVENT_CODE }),
       };
 
       const fbResponse = await fetch(FB_CAPI_URL, {
