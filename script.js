@@ -32,21 +32,6 @@ const PHASE_NAMES = {
 const TOTAL_HOURS = 20;
 const LEVELS = ['Beginner', 'Intermediate', 'Advanced', 'Pro'];
 
-/* ─── TELEGRAM NOTIFICATIONS ─────────────────────────────── */
-const TG_TOKEN   = '8637335557:AAECoz9hwh3tB5LNCmokmTrVNDwvkdvRVxQ';
-const TG_CHAT_ID = '440173247';
-
-async function notifyTelegram(text) {
-  try {
-    await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: TG_CHAT_ID, text, parse_mode: 'HTML' }),
-    });
-  } catch (_) {
-    // Silent fail — notification is non-critical
-  }
-}
 
 /* ─── STATE ─────────────────────────────────────────────── */
 const savedPhases = localStorage.getItem(STORAGE_KEY);
@@ -187,17 +172,6 @@ function initCheckboxes() {
       saveState();
       updateMetrics();
 
-      const done    = checkbox.checked;
-      const icon    = done ? '✅' : '↩️';
-      const status  = done ? 'COMPLETE' : 'UNMARKED';
-      const hours   = getCompletedHours();
-      const pct     = getProgress();
-      const name    = PHASE_NAMES[phase] || `Phase ${phase}`;
-      notifyTelegram(
-        `${icon} <b>Phase ${phase} — ${name}</b>\n` +
-        `Status: <b>${status}</b>\n` +
-        `Progress: ${hours}h / ${TOTAL_HOURS}h (${pct}%)`
-      );
     });
   });
 }
