@@ -956,3 +956,128 @@ button {
     transform: none;
   }
 }
+
+/* ─── CAPI TEST BLOCK ────────────────────────────────────── */
+.capi-test {
+  padding: var(--sp-8) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.capi-test__body {
+  margin-top: var(--sp-6);
+}
+
+.capi-test__desc {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  margin-bottom: var(--sp-5);
+  max-width: 520px;
+}
+
+.capi-test__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.capi-test__fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+}
+
+.capi-test__label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.capi-test__label-text {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.capi-test__input {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  padding: var(--sp-2) var(--sp-3);
+  transition: border-color 0.15s;
+  width: 100%;
+}
+
+.capi-test__input:focus {
+  border-color: var(--color-accent);
+  outline: none;
+}
+
+.capi-test__input::placeholder {
+  color: var(--color-muted);
+}
+
+.capi-test__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.capi-test__btn {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  color: var(--color-text);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  padding: var(--sp-2) var(--sp-3);
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.capi-test__btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.capi-test__btn--primary {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.capi-test__btn--primary:hover {
+  background: var(--color-accent);
+  color: #000;
+}
+
+.capi-test__log {
+  margin-top: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  min-height: 40px;
+}
+
+.capi-log__line {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  padding: var(--sp-1) var(--sp-2);
+  border-left: 2px solid var(--color-border);
+  color: var(--color-muted);
+  word-break: break-all;
+}
+
+.capi-log__line--ok  { border-color: #4caf50; color: #4caf50; }
+.capi-log__line--err { border-color: #e53935; color: #e53935; }
+
+@media (max-width: 480px) {
+  .capi-test__fields {
+    grid-template-columns: 1fr;
+  }
+}

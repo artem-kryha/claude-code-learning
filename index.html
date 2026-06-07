@@ -317,6 +317,48 @@
       </div>
     </section>
 
+    <!-- ─────────────────── CAPI TEST BLOCK ──────────────────── -->
+    <section class="capi-test" id="capi-test" aria-labelledby="capi-test-heading">
+      <div class="container">
+        <header class="section-header fade-in">
+          <div class="section-header__rule" aria-hidden="true"></div>
+          <p class="section-header__eyebrow">Dev Tools</p>
+          <h2 class="section-header__title" id="capi-test-heading">CAPI<br>TESTER</h2>
+        </header>
+
+        <div class="capi-test__body fade-in">
+          <p class="capi-test__desc">Тестовий блок для Conversions API. Заповни дані та надсилай події на сервер Facebook.</p>
+
+          <form class="capi-test__form" id="capi-test-form" novalidate>
+            <div class="capi-test__fields">
+              <label class="capi-test__label">
+                <span class="capi-test__label-text">Email</span>
+                <input class="capi-test__input" type="email" id="capi-email" placeholder="test@example.com" autocomplete="email">
+              </label>
+              <label class="capi-test__label">
+                <span class="capi-test__label-text">Місто</span>
+                <input class="capi-test__input" type="text" id="capi-city" placeholder="Kyiv" autocomplete="address-level2">
+              </label>
+            </div>
+
+            <div class="capi-test__actions">
+              <button class="capi-test__btn capi-test__btn--primary" type="button" data-event="CompleteRegistration">
+                CompleteRegistration
+              </button>
+              <button class="capi-test__btn" type="button" data-event="ViewContent">
+                ViewContent
+              </button>
+              <button class="capi-test__btn" type="button" data-event="Contact">
+                Contact
+              </button>
+            </div>
+          </form>
+
+          <div class="capi-test__log" id="capi-log" aria-live="polite" aria-label="CAPI response log"></div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ─────────────────────── FOOTER ─────────────────────── -->

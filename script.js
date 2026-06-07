@@ -5,16 +5,63 @@
 
 const CAPI_ENDPOINT = 'https://meta-capi.thethor.workers.dev';
 
-function sendCapi(event_name) {
-  fetch(CAPI_ENDPOINT, {
+function getCookie(name) {
+  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  return match ? decodeURIComponent(match[2]) : null;
+}
+
+function sendCapi(event_name, extra = {}) {
+  const fbc = getCookie('_fbc');
+  const payload = {
+    event_name,
+    event_id: crypto.randomUUID(),
+    event_source_url: window.location.href,
+    client_user_agent: navigator.userAgent,
+    ...(fbc && { fbc }),
+    ...extra,
+  };
+  return fetch(CAPI_ENDPOINT, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      event_name,
-      event_source_url: window.location.href,
-      client_user_agent: navigator.userAgent,
-    }),
-  }).catch(() => {});
+    body: JSON.stringify(payload),
+  });
+}
+
+/* ─── CAPI TEST FORM ─────────────────────────────────────── */
+function initCapiTest() {
+  const form    = document.getElementById('capi-test-form');
+  const logEl   = document.getElementById('capi-log');
+  if (!form || !logEl) return;
+
+  function addLog(event_name, ok, body) {
+    const ts   = new Date().toLocaleTimeString();
+    const icon = ok ? '✓' : '✗';
+    const cls  = ok ? 'capi-log__line--ok' : 'capi-log__line--err';
+    const line = document.createElement('div');
+    line.className = `capi-log__line ${cls}`;
+    line.textContent = `[${ts}] ${icon} ${event_name} — ${body}`;
+    logEl.prepend(line);
+  }
+
+  async function fire(event_name) {
+    const email = document.getElementById('capi-email').value.trim();
+    const city  = document.getElementById('capi-city').value.trim();
+    const extra = {};
+    if (email) extra.email = email;
+    if (city)  extra.city  = city;
+
+    try {
+      const res  = await sendCapi(event_name, extra);
+      const text = await res.text();
+      addLog(event_name, res.ok, text);
+    } catch (err) {
+      addLog(event_name, false, err.message);
+    }
+  }
+
+  form.querySelectorAll('[data-event]').forEach(btn => {
+    btn.addEventListener('click', () => fire(btn.dataset.event));
+  });
 }
 
 'use strict';
@@ -206,6 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFadeIn();
   initAccordion();
   initCheckboxes();
+  initCapiTest();
 
   // Delay metrics animation so ring/bars animate on first view
   requestAnimationFrame(() => {
