@@ -1056,6 +1056,16 @@ button {
   color: #000;
 }
 
+.capi-test__btn--purchase {
+  border-color: #4caf50;
+  color: #4caf50;
+}
+
+.capi-test__btn--purchase:hover {
+  background: #4caf50;
+  color: #000;
+}
+
 .capi-test__log {
   margin-top: var(--sp-4);
   display: flex;

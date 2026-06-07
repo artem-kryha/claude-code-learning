@@ -44,11 +44,17 @@ function initCapiTest() {
   }
 
   async function fire(event_name) {
-    const email = document.getElementById('capi-email').value.trim();
-    const city  = document.getElementById('capi-city').value.trim();
+    const email    = document.getElementById('capi-email').value.trim();
+    const city     = document.getElementById('capi-city').value.trim();
+    const value    = document.getElementById('capi-value').value.trim();
+    const currency = document.getElementById('capi-currency').value.trim();
     const extra = {};
     if (email) extra.email = email;
     if (city)  extra.city  = city;
+    if (event_name === 'Purchase' && value) {
+      extra.value    = parseFloat(value);
+      extra.currency = currency || 'USD';
+    }
 
     try {
       const res  = await sendCapi(event_name, extra);

@@ -339,6 +339,14 @@
                 <span class="capi-test__label-text">Місто</span>
                 <input class="capi-test__input" type="text" id="capi-city" placeholder="Kyiv" autocomplete="address-level2">
               </label>
+              <label class="capi-test__label">
+                <span class="capi-test__label-text">Сума (для Purchase)</span>
+                <input class="capi-test__input" type="number" id="capi-value" placeholder="99.00" min="0" step="0.01">
+              </label>
+              <label class="capi-test__label">
+                <span class="capi-test__label-text">Валюта</span>
+                <input class="capi-test__input" type="text" id="capi-currency" placeholder="USD" maxlength="3">
+              </label>
             </div>
 
             <div class="capi-test__actions">
@@ -350,6 +358,9 @@
               </button>
               <button class="capi-test__btn" type="button" data-event="Contact">
                 Contact
+              </button>
+              <button class="capi-test__btn capi-test__btn--purchase" type="button" data-event="Purchase">
+                Purchase
               </button>
             </div>
           </form>

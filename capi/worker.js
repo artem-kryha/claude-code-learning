@@ -33,7 +33,7 @@ export default {
     }
 
     try {
-      const { event_name, event_source_url, event_id, client_user_agent, fbc, email, city } = await request.json();
+      const { event_name, event_source_url, event_id, client_user_agent, fbc, email, city, value, currency } = await request.json();
 
       const user_data = {
         client_ip_address: request.headers.get('CF-Connecting-IP'),
@@ -50,6 +50,7 @@ export default {
         event_source_url,
         user_data,
         ...(event_id && { event_id }),
+        ...(value !== undefined && { custom_data: { value, currency: currency || 'USD' } }),
       };
 
       const payload = {
